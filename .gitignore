@@ -1,4 +1,6 @@
 *.swp
 package/ChangeLog
-package/yaourt-git*
+package/yaourt-concise-git*
 src/po/yaourt/generate.sh
+package/pkg
+package/src
