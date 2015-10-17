@@ -1,0 +1,29 @@
+# Author: Julien MISCHKOWITZ <wain@archlinux.fr>
+# Author: tuxce <tuxce.net@gmail.com>
+pkgname=yaourt-git
+pkgver=$(date +%Y%m%d_%H%M)
+pkgrel=1
+pkgdesc='A pacman wrapper with extended features and AUR support'
+arch=('any')
+url='http://www.archlinux.fr/yaourt-en/'
+license=('GPL')
+depends=('diffutils' 'pacman>=4' 'package-query-git')
+makedepends=('git')
+#optdepends=('aurvote: vote for favorite packages from AUR for inclusion in [community]'
+#    'customizepkg: automatically modify PKGBUILD during install/upgrade'
+#    'rsync: retrieve PKGBUILD from official repositories')
+provides=('yaourt')
+conflicts=('yaourt')
+backup=('etc/yaourtrc')
+source=()
+
+build() { 
+	cp -r ../../src/ "$srcdir/yaourt/"
+	cd "$srcdir/yaourt/"
+	make PREFIX=/usr sysconfdir=/etc localstatedir=/var 
+}
+
+package() {
+	cd "$srcdir/yaourt/"
+	make PREFIX=/usr sysconfdir=/etc localstatedir=/var DESTDIR="$pkgdir" install
+}
