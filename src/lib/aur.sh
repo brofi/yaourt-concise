@@ -186,7 +186,6 @@ install_from_aur() {
 	aur_comments ${pkginfo[0]}
 	echo -e "$CBOLD${pkginfo[0]} ${pkginfo[2]} $C0 ($(date -u -d "@${pkginfo[8]}" "+%F %H:%M"))"
 	[[ ! ${pkginfo[6]#-} ]] && echo -e "$CBLINK$CRED$(gettext 'This package is orphaned')$C0"
-	echo -e "$CBLINK$CRED$(gettext '( Unsupported package: Potentially dangerous ! )')$C0"
 
 	# Build, install/export
 	package_loop ${pkginfo[0]} 0 || manage_error ${pkginfo[0]} ||
