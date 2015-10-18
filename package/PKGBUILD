@@ -18,7 +18,7 @@ backup=('etc/yaourtrc')
 source=()
 
 build() { 
-	cp -r ../../src/ "$srcdir/yaourt"
+	cp -r ../../src/. "$srcdir/yaourt"
 	cd "$srcdir/yaourt"
 	make PREFIX=/usr sysconfdir=/etc localstatedir=/var 
 }
