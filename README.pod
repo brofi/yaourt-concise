@@ -1,3 +1,11 @@
+yaourt-concise: yaourt - just less verbose
+
+Fork of yaourt: https://github.com/archlinuxfr/yaourt
+
+
+Original README:
+
+
 =head1 NAME
 
 yaourt - more than a frontend to pacman
