@@ -2,7 +2,7 @@
 # Author: tuxce <tuxce.net@gmail.com>
 # Author: Andy B. <brofi.archlinux@gmail.com>
 pkgname=yaourt-concise-git
-pkgver=r5.6602e6f_1445137276
+pkgver=r6.b2021a3_1445139496
 pkgrel=1
 pkgdesc='A pacman wrapper with extended features and AUR support'
 arch=('any')

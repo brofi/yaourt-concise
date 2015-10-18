@@ -127,7 +127,6 @@ check_deps() {
             echo -e " - $CYELLOW$dep$C0 $(gettext '(building from AUR)')"
         fi
 	done
-	echo
 	return 0
 }
 
@@ -302,7 +301,7 @@ install_package() {
 	while true; do
 		echo
 		msg "$(_gettext "Continue installing %s ?" "$pkgbase") $(yes_no 1)"
-		prompt $(gettext '[v]iew package contents   [c]heck package with namcap')
+		prompt2 $(gettext '[v]iew package contents   [c]heck package with namcap')
 		local answer=$(builduserinput "YNVC" "Y")
 		echo
 		case "$answer" in
@@ -319,7 +318,6 @@ install_package() {
 				else
 					warning $(gettext 'namcap is not installed')
 				fi
-				echo
 				;;
 			N)	failed=1; break;;
 			*)	break;;
@@ -370,7 +368,7 @@ package_loop() {
 	(( trust )) && default_answer=2
 	while true; do
 		edit_pkgbuild $default_answer || { failed=1; break; }
-		prompt "$(_gettext 'Continue building %s ? ' "$pl_pkgname")$(yes_no 1)"
+		prompt2 "$(_gettext 'Continue building %s ? ' "$pl_pkgname")$(yes_no 1)"
 		builduseragrees || { failed=1; break; }
 		build_package
 		ret=$?

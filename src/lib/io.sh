@@ -150,7 +150,7 @@ init_color() {
 }
 
 
-_show_msg() { echo -en "$1==> $2$C0$CBOLD$3$C0" >&2; }
+_show_msg() { echo -en "$1:: $2$C0$CBOLD$3$C0" >&2; }
 msg()       { _show_msg "$CGREEN" "" "$*\n"; }
 warning()   { _show_msg "$CYELLOW" "$(gettext 'WARNING: ')" "$*\n"; }
 prompt()    {

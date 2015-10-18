@@ -179,7 +179,6 @@ install_from_aur() {
 	title $(_gettext 'Installing %s from AUR' "${pkginfo[0]}")
 	cwd=$(pwd)
 	init_build_dir "$YAOURTTMPDIR/aur-${pkginfo[0]}" || return 1
-	echo
 	msg $(_gettext 'Downloading %s PKGBUILD from AUR...' "${pkginfo[0]}")
 	aur_get_pkgbuild "${pkginfo[0]}" "${pkginfo[5]}" ||
 	  { cd "$cwd"; return 1; }
