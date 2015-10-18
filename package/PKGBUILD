@@ -1,13 +1,14 @@
 # Author: Julien MISCHKOWITZ <wain@archlinux.fr>
 # Author: tuxce <tuxce.net@gmail.com>
+# Author: Andy B. <brofi.archlinux@gmail.com>
 pkgname=yaourt-concise-git
-pkgver=$(date +%Y%m%d_%H%M)
+pkgver=r5.6602e6f_1445137276
 pkgrel=1
 pkgdesc='A pacman wrapper with extended features and AUR support'
 arch=('any')
 url='http://www.archlinux.fr/yaourt-en'
 license=('GPL')
-depends=('diffutils' 'pacman>=4' 'package-query')
+depends=('diffutils' 'pacman>=4.1' 'package-query')
 makedepends=('git')
 #optdepends=('aurvote: vote for favorite packages from AUR for inclusion in [community]'
 #    'customizepkg: automatically modify PKGBUILD during install/upgrade'
@@ -16,6 +17,34 @@ provides=('yaourt')
 conflicts=('yaourt')
 backup=('etc/yaourtrc')
 source=()
+
+pkgver() {
+    git_toplvl="$(git rev-parse --show-toplevel)"
+
+    IFS=$'\n'
+    # added and modified files
+    changed_files=($(git ls-files --modified --others --exclude-standard $git_toplvl))
+    # staged files
+    staged_files=($(git diff-index --cached --name-only HEAD))
+    unset IFS
+
+    # prefix path on staged_files
+    staged_files=("${staged_files[@]/#/$git_toplvl/}")
+
+    # added, modified and staged files
+    diff_files=("${changed_files[@]}" "${staged_files[@]}")
+
+    # ignore PKGBUILD
+    for i in "${!diff_files[@]}"; do
+        [[ "${diff_files[$i]}" == *PKGBUILD ]] && index=$i
+    done
+    [ -z "$index" ] || diff_files=("${diff_files[@]:0:$index}" "${diff_files[@]:$(($index + 1))}")
+
+    printf "r%s.%s_%s" \
+        "$(git rev-list --count HEAD)" \
+        "$(git rev-parse --short HEAD)" \
+        "$(stat -c %Y "${diff_files[@]}" | sort -nr | head -n1)"
+}
 
 build() { 
 	cp -r ../../src/. "$srcdir/yaourt"
