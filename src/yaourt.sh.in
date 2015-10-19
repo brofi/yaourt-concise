@@ -328,6 +328,7 @@ while [[ $1 ]]; do
 		--ignoregroup)      program_arg $A_PS $1 "$2"; shift; IGNOREGRP+=(${1//,/ });;
 		-a|--aur)           AUR=1; AURUPGRADE=1; AURSEARCH=1;;
 		--aur-url)          AURURL="$2"; shift;;
+		--aur-comments)     AURCOMMENT="$2"; shift;;
 		-B|--backup)        MAJOR="backup";;
 		--backupfile)       shift; BACKUPFILE="$1";;
 		-b|--build)         ((BUILD++));;
