@@ -59,6 +59,9 @@ install: $(SCRIPTS)
 	$(INSTALL) -m644 lib/pacman.sh $(DESTDIR)$(libdir)/yaourt
 	$(INSTALL) -m644 lib/pkgbuild.sh $(DESTDIR)$(libdir)/yaourt
 	$(INSTALL) -m644 lib/misc.sh $(DESTDIR)$(libdir)/yaourt
+	# Custom makepkg
+	$(SED) -e 's/==>/::/' -e 's/ ->/:/' /usr/bin/makepkg > lib/makepkg
+	$(INSTALL) -m755 lib/makepkg $(DESTDIR)$(libdir)/yaourt
 	# Man
 	$(INSTALL) -m644 man/*.5 $(DESTDIR)$(mandir)/man5
 	$(INSTALL) -m644 man/*.8 $(DESTDIR)$(mandir)/man8

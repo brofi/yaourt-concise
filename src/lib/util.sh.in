@@ -277,7 +277,7 @@ TMPDIR=${TMPDIR:-/tmp}
 check_dir TMPDIR || die 1
 YAOURTTMPDIR="$TMPDIR/yaourt-tmp-$(id -un)"
 export PACMAN=${PACMAN:-pacman}
-export MAKEPKG=${MAKEPKG:-makepkg}
+export MAKEPKG=${MAKEPKG:-@libdir@/yaourt/makepkg}
 
 # DEVELBUILDDIR is depreceated
 DEVELSRCDIR=${DEVELSRCDIR:-$DEVELBUILDDIR}
